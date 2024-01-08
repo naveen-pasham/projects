@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Promises</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ </head>
+ <body>
+
+    <script>
+        const posts =[{title: 'POST1'},{title: 'POST2'}];
+
+
+function updateLastUserActivityTime() {
+    return new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            const currentTime = new Date().getTime();
+            resolve(document.body.innerHTML=currentTime);
+        }, 1000)
+    }) 
+}
+function createPost() {
+    return new Promise( (resolve, reject) => {
+            posts.push({title: 'POST3'});
+            const error=false;
+            if(!error){
+                resolve();
+            }
+            else{
+                reject("Error: Something went wrong");
+            }
+    }) 
+}
+function printPost() {
+        let output='';
+        posts.forEach((post,index) => {
+            output += `<li>${post.title}</li>`;
+    });
+    document.body.innerHTML=output;
+    
+}
+
+
+function deletePost(){
+    return new Promise((resolve, reject) => {
+        setTimeout( () => {
+                posts.pop();
+                resolve();
+        }, 2000)
+    })
+}
+
+createPost().then(printPost);
+updateLastUserActivityTime();
+deletePost().then(printPost)
+    </script>
+ </body>
+</html>
