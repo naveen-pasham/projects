@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Async Await</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ </head>
+ <body>
+
+    <script>
+        console.log('person1 shows ticket');
+console.log('person2 shows ticket');
+
+const preMovie = async () => {
+
+  const person3PromiseToShowTicketWhenWifeArrives = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('ticket'), 3000);
+  });
+  const getPopcorn =  new Promise((resolve, reject) => {
+		setTimeout(() => resolve('popcorn'), 3000);
+  });
+  
+  const addButter =  new Promise((resolve, reject) => {
+		setTimeout(() => resolve('butter'), 3000);
+  });
+  const getColdDrinks =  new Promise((resolve, reject) => {
+		setTimeout(() => resolve('coldDrinks'), 3000);
+  });
+
+  let ticket = await person3PromiseToShowTicketWhenWifeArrives;
+
+  console.log(`got the ${ticket}`);
+  console.log(`Husband:we should go in now`);
+  console.log(`Wife: "i am hungry"`);
+  
+  let popcorn = await getPopcorn;
+  console.log(`Husband: here is ${popcorn}`);
+	console.log(`Husband:we should go in now`);
+  console.log(`Wife: "I dont like popcorn without butter!"`);
+  
+  let butter = await addButter;
+  console.log(`added ${butter}`);
+   
+  console.log(`Husband:Anything else darling`);
+	console.log(`Wife: lets go we are going to miss the preivew`);
+  console.log(`Husband: thanks for the reminder *grin*`);
+
+  let coldDrink = await getColdDrinks;
+  console.log(`added ${coldDrink}`);
+  
+  return coldDrink;
+  
+};
+
+preMovie().then((t) => console.log(`person4 shows ${t}`));
+
+console.log('person4 shows ticket');
+
+
+
+
+const prepost = async () => {
+
+const createPost = new Promise((resolve, reject) => {
+  posts.push({title: 'POST3'});
+  const error=false;
+  if(!error){
+      resolve();
+  }
+  else{
+      reject("Error: Something went wrong");
+  }
+});
+
+const deletePost = new Promise((resolve, reject) => {
+  setTimeout( () => {
+    posts.pop();
+    resolve();
+}, 2000)
+});  
+};
+
+
+
+
+  
+  
+</script>
+ </body>
+</html>
