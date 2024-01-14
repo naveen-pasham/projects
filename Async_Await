@@ -41,13 +41,13 @@ const preMovie = async () => {
   
   let butter = await addButter;
   console.log(`added ${butter}`);
+  let coldDrink = await getColdDrinks;
+  console.log(`added ${coldDrink}`);
    
   console.log(`Husband:Anything else darling`);
 	console.log(`Wife: lets go we are going to miss the preivew`);
   console.log(`Husband: thanks for the reminder *grin*`);
 
-  let coldDrink = await getColdDrinks;
-  console.log(`added ${coldDrink}`);
   
   return coldDrink;
   
@@ -59,7 +59,7 @@ console.log('person4 shows ticket');
 
 
 
-
+const posts =[{title: 'POST1'},{title: 'POST2'}];
 const prepost = async () => {
 
 const createPost = new Promise((resolve, reject) => {
@@ -72,19 +72,17 @@ const createPost = new Promise((resolve, reject) => {
       reject("Error: Something went wrong");
   }
 });
+let createdpost = await createPost;
 
 const deletePost = new Promise((resolve, reject) => {
   setTimeout( () => {
     posts.pop();
     resolve();
 }, 2000)
-});  
+}); 
+let deletedpost = await deletePost;
+createPost.then(deletePost).catch(err=>console.log("something went wrong"));
 };
-
-
-
-
-  
   
 </script>
  </body>
