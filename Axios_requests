@@ -1,7 +1,49 @@
-// GET REQUEST
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Axios Crash Course</title>
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="text-center">
+        <h1 class="display-4 text-center mb-3">Axios Crash Course</h1>
+        <button class="btn btn-primary my-3" id="get">GET</button>
+        <button class="btn btn-info" id="post">POST</button>
+        <button class="btn btn-warning" id="update">PUT/PATCH</button>
+        <button class="btn btn-danger" id="delete">DELETE</button>
+        <button class="btn btn-secondary" id="sim">Sim Requests</button>
+        <button class="btn btn-secondary" id="headers">
+          Custom Headers
+        </button>
+        <button class="btn btn-secondary" id="transform">
+          Transform
+        </button>
+        <button class="btn btn-secondary" id="error">
+          Error Handling
+        </button>
+        <button class="btn btn-secondary" id="cancel">
+          Cancel
+        </button>
+      </div>
+      <hr />
+      <div id="res"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script>
+    // GET REQUEST
 function getTodos() {
   axios
-    .get('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos?_limit=5', {
+    .get('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos?_limit=5', {
       timeout: 5000
     })
     .then(res => showOutput(res))
@@ -11,7 +53,7 @@ function getTodos() {
 // POST REQUEST
 function addTodo() {
    axios
-    .post('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos', {
+    .post('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos', {
       title: 'New Todo',
       completed: false
     })
@@ -22,7 +64,7 @@ function addTodo() {
 // PUT/PATCH REQUEST
 function updateTodo() {
    axios
-    .put('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos/659bfb7e14086703e8ccfce3', {
+    .put('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos/65a35b5fb54a2f03e89a4b3c', {
       title: 'Updated Todo',
       completed: true
     })
@@ -33,7 +75,7 @@ function updateTodo() {
 // DELETE REQUEST
 function removeTodo() {
   axios
-    .delete('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos/659bfb7e14086703e8ccfce3')
+    .delete('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos/659bfb7e14086703e8ccfce3')
     .then(res => showOutput(res))
     .catch(err => console.error(err));
 }
@@ -42,8 +84,8 @@ function removeTodo() {
 function getData() {
   axios
     .all([
-      axios.get('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos?_limit=5'),
-      axios.get('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/posts?_limit=5')
+      axios.get('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos?_limit=5'),
+      axios.get('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/posts?_limit=5')
     ])
     .then(axios.spread((todos, posts) => showOutput(posts)))
     .catch(err => console.error(err));
@@ -60,7 +102,7 @@ function customHeaders() {
 
   axios
     .post(
-      'https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos',
+      'https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos',
       {
         title: 'New Todo',
         completed: false
@@ -75,7 +117,7 @@ function customHeaders() {
 function transformResponse() {
   const options = {
     method: 'post',
-    url: 'https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos',
+    url: 'https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos',
     data: {
       title: 'Hello World'
     },
@@ -91,7 +133,7 @@ function transformResponse() {
 // ERROR HANDLING
 function errorHandling() {
    axios
-    .get('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todoss', {
+    .get('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todoss', {
       // validateStatus: function(status) {
       //   return status < 500; // Reject only if status is greater or equal to 500
       // }
@@ -121,7 +163,7 @@ function cancelToken() {
   const source = axios.CancelToken.source();
 
   axios
-    .get('https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288/todos', {
+    .get('https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818/todos', {
       cancelToken: source.token
     })
     .then(res => showOutput(res))
@@ -153,7 +195,7 @@ axios.interceptors.request.use(
 );
 // AXIOS INSTANCES
 const axiosInstance = axios.create({
-  baseURL: 'https://crudcrud.com/api/ced7e17ab2984e789f6e4a0b6aaf3288'
+  baseURL: 'https://crudcrud.com/api/08dc7cfecf2148eb946de669f3dec818'
 });
 // Show output in browser
 function showOutput(res) {
@@ -203,3 +245,6 @@ document
   .addEventListener('click', transformResponse);
 document.getElementById('error').addEventListener('click', errorHandling);
 document.getElementById('cancel').addEventListener('click', cancelToken);
+</script>
+  </body>
+</html>
